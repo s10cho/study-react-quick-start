@@ -1,5 +1,4 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-
 import React from 'react';
 import MyApp from "./page/MyApp";
 import Home from "./page/Home";
@@ -12,13 +11,13 @@ import CounterTogether from "./page/CounterTogether";
 import TicTacToe from "./page/TicTacToe";
 
 const menus = [
-    {to: "MyApp", label: "MyApp"},
-    {to: "AboutPage", label: "AboutPage"},
-    {to: "Profile", label: "Profile"},
-    {to: "ShoppingList", label: "ShoppingList"},
-    {to: "Counter", label: "Counter"},
-    {to: "CounterTogether", label: "CounterTogether"},
-    {to: "TicTacToe", label: "TicTacToe"},
+    {to: "MyApp", label: "MyApp", page: MyApp},
+    {to: "AboutPage", label: "AboutPage", page: AboutPage},
+    {to: "Profile", label: "Profile", page: Profile},
+    {to: "ShoppingList", label: "ShoppingList", page: ShoppingList},
+    {to: "Counter", label: "Counter", page: Counter},
+    {to: "CounterTogether", label: "CounterTogether", page: CounterTogether},
+    {to: "TicTacToe", label: "TicTacToe", page: TicTacToe},
 ];
 
 function App() {
@@ -26,13 +25,9 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home menus={menus}/>}/>
-                <Route path="/MyApp" element={<MyApp/>}></Route>
-                <Route path="/AboutPage" element={<AboutPage/>}></Route>
-                <Route path="/Profile" element={<Profile/>}></Route>
-                <Route path="/ShoppingList" element={<ShoppingList/>}></Route>
-                <Route path="/Counter" element={<Counter/>}></Route>
-                <Route path="/CounterTogether" element={<CounterTogether/>}></Route>
-                <Route path="/TicTacToe" element={<TicTacToe/>}></Route>
+                {menus.map((menu, index) => (
+                    <Route key={index} path={menu.to} element={<menu.page/>}/>
+                ))}
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
         </BrowserRouter>
